@@ -17,6 +17,7 @@
 #ifndef UDP_DRIVER__CONVERTERS_HPP_
 #define UDP_DRIVER__CONVERTERS_HPP_
 
+<<<<<<< HEAD:udp_driver/include/udp_driver/converters.hpp
 #include <boost/asio.hpp>
 #include "std_msgs/msg/int32.hpp"
 
@@ -40,5 +41,8 @@ inline void convertToRosMessage(const MutSocketBuffer & in, std_msgs::msg::Int32
 }
 }  // namespace msgs
 }  // namespace autoware
+=======
+#include "converters/std_msgs.hpp"
+>>>>>>> main:udp_driver/include/converters.hpp
 
 #endif  // UDP_DRIVER__CONVERTERS_HPP_

@@ -14,6 +14,7 @@
 
 // Developed by LeoDrive, 2021
 
+<<<<<<< HEAD:udp_driver/test/test_udp_receiver.cpp
 #include <string>
 
 #include "gtest/gtest.h"
@@ -38,3 +39,13 @@ TEST(IoContextTest, LifeCycleTest) {
   receiver.close();
   EXPECT_EQ(receiver.isOpen(), false);
 }
+=======
+#ifndef TRANSPORT_DRIVER_COMMON_HPP
+#define TRANSPORT_DRIVER_COMMON_HPP
+
+#include <boost/asio.hpp>
+
+typedef boost::asio::mutable_buffer MutSocketBuffer;
+
+#endif //TRANSPORT_DRIVER_COMMON_HPP
+>>>>>>> main:udp_driver/include/converters/common.hpp

@@ -14,6 +14,7 @@
 
 // Developed by LeoDrive, 2021
 
+<<<<<<< HEAD
 #include <memory>
 #include <vector>
 
@@ -31,6 +32,20 @@ void counter(std::shared_ptr<std::vector<int32_t>> container, int32_t count)
 
 void check_container_size(std::shared_ptr<std::vector<int32_t>> container)
 {
+=======
+#include <gtest/gtest.h>
+#include "io_context.hpp"
+
+using namespace autoware::drivers;
+
+static constexpr int16_t LENGTH = 10;
+
+void counter(std::shared_ptr<std::vector<int32_t>> container, int32_t count) {
+  container->push_back(count);
+}
+
+void check_container_size(std::shared_ptr<std::vector<int32_t>> container) {
+>>>>>>> main
   EXPECT_EQ(container->size(), LENGTH);
 }
 
