@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef UDP_COMPONENT__UDP_COMPONENT_HPP_
-#define UDP_COMPONENT__UDP_COMPONENT_HPP_
+#ifndef UDP_COMPONENT_HPP_
+#define UDP_COMPONENT_HPP_
 
 #include <rclcpp/rclcpp.hpp>
 
@@ -23,7 +23,7 @@
 #include <vector>
 
 #include "udp_msgs/msg/udp_packet.hpp"
-#include "udp_driver/udp_driver.hpp"
+#include "udp_driver.hpp"
 
 namespace udp_component
 {
@@ -31,7 +31,7 @@ namespace udp_component
 using Packet = std::vector<uint8_t>;
 
 using autoware::drivers::IoContext;
-using autoware::drivers::udp_driver::UdpDriver;
+using autoware::drivers::UdpDriver;
 
 class UdpComponent : public rclcpp::Node
 {
@@ -67,4 +67,4 @@ private:
   rclcpp::Publisher<udp_msgs::msg::UdpPacket>::SharedPtr udp_publisher_;
 };  // class UdpComponent
 }  //  namespace udp_component
-#endif  // UDP_COMPONENT__UDP_COMPONENT_HPP_
+#endif  // UDP_COMPONENT_HPP_

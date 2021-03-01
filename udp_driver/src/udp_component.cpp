@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-#include "udp_component/udp_component.hpp"
+#include "udp_component.hpp"
 
 #include <string>
 #include <thread>

@@ -17,30 +17,19 @@
 #include <gtest/gtest.h>
 #include "udp_socket.hpp"
 
-<<<<<<< HEAD
+using autoware::drivers::UdpSocket;
 using autoware::drivers::IoContext;
-using autoware::drivers::udp_driver::UdpSocket;
-=======
-using namespace autoware::drivers;
->>>>>>> main
 
 const char ip[] = "127.0.0.1";
 constexpr uint16_t port = 8000;
 constexpr float PI = 3.14159265359;
 
-<<<<<<< HEAD
 void handle_data(const MutSocketBuffer & buffer)
 {
   float received_PI = *reinterpret_cast<float *>(buffer.data());
   EXPECT_EQ(buffer.size(), sizeof(received_PI));
   EXPECT_EQ(received_PI, PI);
   std::cout << "[handle_data]" << std::endl;
-=======
-void handle_data(const MutSocketBuffer &buffer) {
-  float received_PI = *(float *) buffer.data();
-  EXPECT_EQ(buffer.size(), sizeof(received_PI));
-  EXPECT_EQ(received_PI, PI);
->>>>>>> main
 }
 
 TEST(UdpDataTest, LifeCycleTest) {
@@ -79,12 +68,8 @@ TEST(UdpDataTest, BlockingSendReceiveTest) {
 
   receiver.bind();
 
-<<<<<<< HEAD
   std::size_t size = sender.send(
     MutSocketBuffer(reinterpret_cast<void *>(const_cast<float *>(&PI)), sizeof(PI)));
-=======
-  std::size_t size = sender.send(MutSocketBuffer((void *) &PI, sizeof(PI)));
->>>>>>> main
   EXPECT_EQ(size, sizeof(PI));
 
   float received_PI = 0.0f;
@@ -113,11 +98,7 @@ TEST(UdpDataTest, NonBlockingSendReceiveTest) {
   receiver.bind();
   receiver.asyncReceive(boost::bind(handle_data, _1));
 
-<<<<<<< HEAD
   MutSocketBuffer buffer(reinterpret_cast<void *>(const_cast<float *>(&PI)), sizeof(PI));
-=======
-  MutSocketBuffer buffer((void *) &PI, sizeof(PI));
->>>>>>> main
   sender.asyncSend(buffer);
   sender.asyncSend(buffer);
   sender.asyncSend(buffer);
@@ -145,12 +126,8 @@ TEST(UdpDataTest, BlockingSendNonBlockingReceiveTest) {
   receiver.bind();
   receiver.asyncReceive(boost::bind(handle_data, _1));
 
-<<<<<<< HEAD
   std::size_t size = sender.send(
     MutSocketBuffer(reinterpret_cast<void *>(const_cast<float *>(&PI)), sizeof(PI)));
-=======
-  std::size_t size = sender.send(MutSocketBuffer((void *) &PI, sizeof(PI)));
->>>>>>> main
   EXPECT_EQ(size, sizeof(PI));
 
   std::this_thread::sleep_for(std::chrono::milliseconds(1000));

@@ -16,7 +16,7 @@
 
 cmake_minimum_required(VERSION 3.5)
 
-project(transport_driver)
+project(udp_driver)
 
 # Consider passing `-DCMAKE_BUILD_TYPE=Debug` option to cmake to export Debug symbols.
 if (NOT CMAKE_BUILD_TYPE)
@@ -33,6 +33,7 @@ find_package(ament_cmake_auto REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(io_context REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system thread)
 if (Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
@@ -44,15 +45,17 @@ include_directories(include)
 ament_export_include_directories(include)
 ament_auto_find_build_dependencies()
 ament_auto_add_library(${PROJECT_NAME} SHARED
-        src/io_context.cpp
         src/udp_socket.cpp
         src/udp_driver.cpp
-        src/converters/std_msgs.cpp
         examples/udp_driver_node.cpp)
-ament_target_dependencies(${PROJECT_NAME} "rclcpp" "std_msgs" "Boost")
+ament_target_dependencies(${PROJECT_NAME} "rclcpp" "io_context" "std_msgs")
 
-target_compile_options(${PROJECT_NAME} PUBLIC "-O0" PRIVATE -Wno-sign-conversion -Wno-conversion)
-target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
+target_compile_options(${PROJECT_NAME} PUBLIC "-O0" PRIVATE -Wall)
+
+if (Boost_FOUND)
+  ament_target_dependencies(${PROJECT_NAME} "Boost")
+  target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
+endif ()
 
 install(
         DIRECTORY include
@@ -66,19 +69,13 @@ if (BUILD_TESTING)
     ament_lint_auto_find_test_dependencies()
 
     set(TEST_FILES
-            test_io_context.cpp
             test_udp_socket.cpp
             test_udp_data.cpp
             test_udp_driver.cpp
             test_udp_driver_node.cpp)
 
-<<<<<<< HEAD
     foreach(file ${TEST_FILES})
         get_filename_component(name "${file}" NAME_WE)
-=======
-    foreach (file ${TEST_FILES})
-        get_filename_component(name "${file}" NAME_WLE)
->>>>>>> main
         set(TEST_UDP_DRIVER_EXE ${name})
 
         ament_add_gtest(${TEST_UDP_DRIVER_EXE}
@@ -87,7 +84,6 @@ if (BUILD_TESTING)
         ament_target_dependencies(${TEST_UDP_DRIVER_EXE} rclcpp std_msgs Boost)
 
         target_include_directories(${TEST_UDP_DRIVER_EXE} PRIVATE include)
-<<<<<<< HEAD
         target_link_libraries(${TEST_UDP_DRIVER_EXE})
     endforeach()
     find_package(ament_lint_auto REQUIRED)
@@ -108,6 +104,7 @@ ament_target_dependencies(udp_component
   "rclcpp"
   "rclcpp_components"
   "udp_msgs"
+  "io_context"
   "Boost"
 )
 
@@ -136,10 +133,5 @@ install(
 )
 
 ament_export_include_directories(include)
-=======
-        target_link_libraries(${TEST_UDP_DRIVER_EXE} ${PROJECT_NAME})
-    endforeach ()
-endif ()
->>>>>>> main
 
 ament_package()

@@ -17,30 +17,23 @@
 #ifndef UDP_DRIVER__UDP_DRIVER_HPP_
 #define UDP_DRIVER__UDP_DRIVER_HPP_
 
+#include <iostream>
 #include <memory>
 #include <string>
 
-#include "io_context.hpp"
+#include "io_context/io_context.hpp"
 #include "udp_socket.hpp"
 
-<<<<<<< HEAD:udp_driver/include/udp_driver/udp_driver.hpp
 
 namespace autoware
 {
 namespace drivers
 {
-namespace udp_driver
-{
 
-=======
-namespace autoware {
-namespace drivers {
->>>>>>> main:udp_driver/include/udp_driver.hpp
 
 class UdpDriver
 {
 public:
-<<<<<<< HEAD:udp_driver/include/udp_driver/udp_driver.hpp
   explicit UdpDriver(IoContext & ctx)
   : m_ctx(ctx) {}
   ~UdpDriver()
@@ -68,24 +61,6 @@ private:
   std::shared_ptr<UdpSocket> m_sender;
   std::shared_ptr<UdpSocket> m_receiver;
 };
-}  // namespace udp_driver
-=======
-  UdpDriver(const IoContext &ctx);
-  ~UdpDriver();
-
-  void init_sender(const std::string &ip, uint16_t port);
-  void init_receiver(const std::string &ip, uint16_t port);
-
-  std::shared_ptr<UdpSocket> sender() const;
-  std::shared_ptr<UdpSocket> receiver() const;
-
-private:
-  const IoContext &m_ctx;
-  std::shared_ptr<UdpSocket> m_sender;
-  std::shared_ptr<UdpSocket> m_receiver;
-};
-
->>>>>>> main:udp_driver/include/udp_driver.hpp
 }  // namespace drivers
 }  // namespace autoware
 #endif  // UDP_DRIVER__UDP_DRIVER_HPP_

@@ -14,32 +14,6 @@
 
 // Developed by LeoDrive, 2021
 
-<<<<<<< HEAD:udp_driver/test/test_udp_receiver.cpp
-#include <string>
-
-#include "gtest/gtest.h"
-#include "udp_driver/udp_socket.hpp"
-
-using autoware::drivers::IoContext;
-using autoware::drivers::udp_driver::UdpSocket;
-
-TEST(IoContextTest, LifeCycleTest) {
-  std::string ip = "127.0.0.1";
-  uint16_t port = 8000;
-
-  IoContext ctx;
-  UdpSocket receiver(ctx, ip, port);
-
-  EXPECT_EQ(receiver.ip(), ip);
-  EXPECT_EQ(receiver.port(), port);
-
-  EXPECT_EQ(receiver.isOpen(), false);
-  receiver.open();
-  EXPECT_EQ(receiver.isOpen(), true);
-  receiver.close();
-  EXPECT_EQ(receiver.isOpen(), false);
-}
-=======
 #ifndef TRANSPORT_DRIVER_COMMON_HPP
 #define TRANSPORT_DRIVER_COMMON_HPP
 
@@ -48,4 +22,3 @@ TEST(IoContextTest, LifeCycleTest) {
 typedef boost::asio::mutable_buffer MutSocketBuffer;
 
 #endif //TRANSPORT_DRIVER_COMMON_HPP
->>>>>>> main:udp_driver/include/converters/common.hpp

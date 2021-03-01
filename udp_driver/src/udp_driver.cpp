@@ -21,11 +21,11 @@
 namespace autoware {
 namespace drivers {
 
-UdpDriver::UdpDriver(const IoContext &ctx) : m_ctx(ctx) {
+UdpDriver(IoContext & ctx) : m_ctx(ctx) {
 
 }
 
-UdpDriver::~UdpDriver() {
+~UdpDriver() {
   std::cout << "[UdpDriver::~UdpDriver] INFO => Destructing..." << std::endl;
 }
 
