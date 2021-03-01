@@ -15,6 +15,7 @@
 
   <depend>libboost-dev</depend>
   <depend>libboost-system-dev</depend>
+  <depend>libboost-thread-dev</depend>
   <depend>rclcpp</depend>
   <depend>std_msgs</depend>
 
