@@ -14,11 +14,11 @@
 
 // Developed by LeoDrive, 2021
 
-#ifndef TRANSPORT_DRIVER_COMMON_HPP
-#define TRANSPORT_DRIVER_COMMON_HPP
+#ifndef IO_CONTEXT__CONVERTERS__COMMON_HPP_
+#define IO_CONTEXT__CONVERTERS__COMMON_HPP_
 
 #include <boost/asio.hpp>
 
 typedef boost::asio::mutable_buffer MutSocketBuffer;
 
-#endif //TRANSPORT_DRIVER_COMMON_HPP
+#endif  // IO_CONTEXT__CONVERTERS__COMMON_HPP_

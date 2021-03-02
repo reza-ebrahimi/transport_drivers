@@ -14,19 +14,20 @@
 
 // Developed by LeoDrive, 2021
 
-#ifndef UDP_DRIVER_IO_CONTEXT_HPP
-#define UDP_DRIVER_IO_CONTEXT_HPP
-
+#ifndef IO_CONTEXT__IO_CONTEXT_HPP_
+#define IO_CONTEXT__IO_CONTEXT_HPP_
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
 #include <boost/noncopyable.hpp>
+
+#include <memory>
 
 namespace autoware {
 namespace drivers {
 
 class IoContext : private boost::noncopyable {
 public:
-  IoContext(int16_t threads_count = -1);
+  explicit IoContext(int16_t threads_count = -1);
   ~IoContext();
 
   boost::asio::io_service &ios() const;
@@ -50,4 +51,4 @@ private:
 }  // namespace drivers
 }  // namespace autoware
 
-#endif //UDP_DRIVER_IO_CONTEXT_HPP
+#endif  // IO_CONTEXT__IO_CONTEXT_HPP_

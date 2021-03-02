@@ -14,13 +14,15 @@
 
 // Developed by LeoDrive, 2021
 
-#ifndef UDP_DRIVER_UDP_SOCKET_HPP
-#define UDP_DRIVER_UDP_SOCKET_HPP
-
-#include <string>
+#ifndef UDP_DRIVER__UDP_SOCKET_HPP_
+#define UDP_DRIVER__UDP_SOCKET_HPP_
 #include <boost/array.hpp>
+
 #include <io_context/io_context.hpp>
 #include <io_context/converters.hpp>
+
+#include <string>
+
 
 using boost::asio::ip::udp;
 using boost::asio::ip::address;
@@ -80,4 +82,4 @@ private:
 }  // namespace drivers
 }  // namespace autoware
 
-#endif //UDP_DRIVER_UDP_SOCKET_HPP
+#endif  // UDP_DRIVER__UDP_SOCKET_HPP_

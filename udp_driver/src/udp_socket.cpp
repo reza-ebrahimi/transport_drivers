@@ -17,22 +17,31 @@
 #include "udp_socket.hpp"
 
 #include <iostream>
+#include <string>
+#include <utility>
 
-namespace autoware {
-namespace drivers {
+namespace autoware
+{
 
-UdpSocket::UdpSocket(const IoContext &ctx, const std::string &ip, uint16_t port) :
-  m_ctx(ctx),
+namespace drivers
+{
+
+UdpSocket::UdpSocket(const IoContext &ctx, const std::string &ip, uint16_t port)
+: m_ctx(ctx),
   m_endpoint(address::from_string(ip), port),
-  m_udp_socket(ctx.ios()) {
+  m_udp_socket(ctx.ios())
+{
+  std::cout << "UdpSocket::UdpSocket] INFO => Constructing..." << std::endl;
 }
 
-UdpSocket::~UdpSocket() {
+UdpSocket::~UdpSocket()
+{
   std::cout << "[UdpSocket::~UdpSocket] INFO => Destructing..." << std::endl;
   close();
 }
 
-std::size_t UdpSocket::send(const MutSocketBuffer &buff) {
+std::size_t UdpSocket::send(const MutSocketBuffer &buff)
+{
   try {
     return m_udp_socket.send_to(buff, m_endpoint);
   } catch (const boost::system::system_error &error) {
@@ -41,7 +50,8 @@ std::size_t UdpSocket::send(const MutSocketBuffer &buff) {
   }
 }
 
-size_t UdpSocket::receive(const MutSocketBuffer &buff) {
+size_t UdpSocket::receive(const MutSocketBuffer &buff)
+{
   boost::system::error_code error;
   boost::asio::ip::udp::endpoint sender_endpoint;
 
@@ -54,7 +64,8 @@ size_t UdpSocket::receive(const MutSocketBuffer &buff) {
   return len;
 }
 
-void UdpSocket::asyncSend(const MutSocketBuffer &buff) {
+void UdpSocket::asyncSend(const MutSocketBuffer &buff)
+{
   m_udp_socket.async_send_to(buff, m_endpoint, boost::bind(
     &UdpSocket::asyncSendHandler,
     this,
@@ -72,13 +83,17 @@ void UdpSocket::asyncReceive(Functor func) {
                 boost::asio::placeholders::bytes_transferred));
 }
 
-void UdpSocket::asyncSendHandler(const boost::system::error_code &error, std::size_t bytes_transferred) {
+void UdpSocket::asyncSendHandler(const boost::system::error_code &error,
+                                 std::size_t bytes_transferred)
+{
   if (error) {
     std::cout << "[UdpSocket::asyncSendHandler] Error => " << error.message() << std::endl;
   }
 }
 
-void UdpSocket::asyncReceiveHandler(const boost::system::error_code &error, std::size_t bytes_transferred) {
+void UdpSocket::asyncReceiveHandler(const boost::system::error_code &error,
+                                    std::size_t bytes_transferred)
+{
   if (error) {
     std::cout << "[UdpSocket::asyncReceiveHandler] Error => " << error.message() << std::endl;
     return;

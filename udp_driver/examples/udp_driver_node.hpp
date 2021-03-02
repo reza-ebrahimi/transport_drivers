@@ -14,8 +14,8 @@
 
 // Developed by LeoDrive, 2021
 
-#ifndef UDP_DRIVER__UDP_DRIVER_NODE_HPP_
-#define UDP_DRIVER__UDP_DRIVER_NODE_HPP_
+#ifndef UDP_DRIVER__EXAMPLES__UDP_DRIVER_NODE_HPP_
+#define UDP_DRIVER__EXAMPLES__UDP_DRIVER_NODE_HPP_
 
 #include <chrono>
 #include <memory>
@@ -53,4 +53,4 @@ private:
 }  // namespace drivers
 }  // namespace autoware
 
-#endif  // UDP_DRIVER__UDP_DRIVER_NODE_HPP_
+#endif  // UDP_DRIVER__EXAMPLES__UDP_DRIVER_NODE_HPP_

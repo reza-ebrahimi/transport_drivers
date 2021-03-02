@@ -13,14 +13,13 @@
 // limitations under the License.
 
 // Developed by LeoDrive, 2021
-
 #include <gtest/gtest.h>
+
+#include <rclcpp/rclcpp.hpp>
 
 #include <chrono>
 #include <string>
 #include <vector>
-
-#include <rclcpp/rclcpp.hpp>
 
 #include "udp_driver.hpp"
 
@@ -42,7 +41,7 @@ TEST(UdpDriverTest, NonBlockingSendReceiveTest) {
   driver.receiver()->open();
   driver.receiver()->bind();
   driver.receiver()->asyncReceive([&](const MutSocketBuffer &buffer) {
-    sum += *(int32_t *) buffer.data();
+    sum += *reinterpret_cast<int32_t *>(buffer.data());
   });
 
   driver.sender()->open();

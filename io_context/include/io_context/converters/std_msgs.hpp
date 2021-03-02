@@ -14,8 +14,8 @@
 
 // Developed by LeoDrive, 2021
 
-#ifndef TRANSPORT_DRIVER_STD_MSGS_HPP
-#define TRANSPORT_DRIVER_STD_MSGS_HPP
+#ifndef IO_CONTEXT__CONVERTERS__STD_MSGS_HPP_
+#define IO_CONTEXT__CONVERTERS__STD_MSGS_HPP_
 
 /*
  * std_msgs::msg::Int variant
@@ -97,4 +97,4 @@ void convertToRos2Message(const MutSocketBuffer &in, std_msgs::msg::Float64 &out
 }  // namespace msgs
 }  // namespace autoware
 
-#endif //TRANSPORT_DRIVER_STD_MSGS_HPP
+#endif  // IO_CONTEXT__CONVERTERS__STD_MSGS_HPP_

@@ -13,11 +13,14 @@
 // limitations under the License.
 
 // Developed by LeoDrive, 2021
-
 #include <gtest/gtest.h>
+
+#include <memory>
+#include <vector>
+
 #include "io_context/io_context.hpp"
 
-using namespace autoware::drivers;
+using autoware::drivers::IoContext;
 
 static constexpr int16_t LENGTH = 10;
 

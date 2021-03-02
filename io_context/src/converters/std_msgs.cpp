@@ -123,6 +123,6 @@ void convertToRos2Message(const MutSocketBuffer &in, std_msgs::msg::Float64 &out
   out.data = *boost::asio::buffer_cast<double_t *>(in);
 }
 
-}
-}
+}  // namespace msgs
+}  // namespace autoware
 
