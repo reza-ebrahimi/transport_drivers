@@ -35,6 +35,7 @@ find_package(rclcpp_components REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(io_context REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system thread)
+
 if (Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
     link_directories(${Boost_LIBRARY_DIRS})
@@ -45,9 +46,9 @@ include_directories(include)
 ament_export_include_directories(include)
 ament_auto_find_build_dependencies()
 add_library(${PROJECT_NAME} SHARED
-        src/udp_socket.cpp
-        src/udp_driver.cpp
-        examples/udp_driver_node.cpp)
+  src/udp_socket.cpp
+  src/udp_driver.cpp
+  examples/udp_driver_node.cpp)
 
 ament_target_dependencies(${PROJECT_NAME} "rclcpp" "io_context" "std_msgs")
 
@@ -59,8 +60,8 @@ if (Boost_FOUND)
 endif ()
 
 install(
-        DIRECTORY include
-        DESTINATION include
+  DIRECTORY include
+  DESTINATION include
 )
 
 if (BUILD_TESTING)
@@ -110,7 +111,7 @@ ament_target_dependencies(udp_component
 )
 
 target_include_directories(udp_component PRIVATE include)
-target_link_libraries(udp_component ${Boost_LIBRARIES})
+target_link_libraries(udp_component ${Boost_LIBRARIES} io_context)
 
 rclcpp_components_register_node(udp_component
   PLUGIN "udp_component::UdpComponent"

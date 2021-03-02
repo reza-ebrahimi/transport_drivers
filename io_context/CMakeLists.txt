@@ -69,14 +69,14 @@ endif ()
 
 target_compile_options(${PROJECT_NAME} PUBLIC "-O0" PRIVATE -Wall)
 
-ament_export_dependencies(std_msgs)
-
-target_include_directories(${PROJECT_NAME} PUBLIC
+target_include_directories(${PROJECT_NAME}
+  PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
 
-ament_export_targets(export_io_context HAS_LIBRARY_TARGET)
+ament_export_dependencies(std_msgs)
+ament_export_libraries(${PROJECT_NAME})
 
 install(
   DIRECTORY include/
@@ -85,14 +85,9 @@ install(
 
 install(
   TARGETS ${PROJECT_NAME}
-  EXPORT export_io_context
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
   RUNTIME DESTINATION bin
-  INCLUDES DESTINATION include
 )
-
-ament_export_include_directories(include)
-ament_export_libraries(${PROJECT_NAME})
 
 ament_package()
