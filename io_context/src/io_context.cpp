@@ -18,8 +18,10 @@
 
 #include <iostream>
 
-namespace autoware {
-namespace drivers {
+namespace autoware
+{
+namespace drivers
+{
 
 IoContext::IoContext(int16_t threads_count)
 : m_ios(new boost::asio::io_service()),
@@ -34,8 +36,8 @@ IoContext::IoContext(int16_t threads_count)
     m_ios_thread_workers->create_thread(boost::bind(&boost::asio::io_service::run, &ios()));
   }
 
-  std::cout << "[IoContext::IoContext] INFO => Thread(s) Created: "
-            << serviceThreadCount() << std::endl;
+  std::cout << "[IoContext::IoContext] INFO => Thread(s) Created: " <<
+    serviceThreadCount() << std::endl;
 }
 
 IoContext::~IoContext()
@@ -44,7 +46,7 @@ IoContext::~IoContext()
   waitForExit();
 }
 
-boost::asio::io_service &IoContext::ios() const
+boost::asio::io_service & IoContext::ios() const
 {
   return *m_ios;
 }
@@ -62,7 +64,7 @@ uint32_t IoContext::serviceThreadCount()
 void IoContext::waitForExit()
 {
   if (!ios().stopped()) {
-    ios().post([&]() { m_work.reset(); });
+    ios().post([&]() {m_work.reset();});
   }
 
   m_ios_thread_workers->interrupt_all();

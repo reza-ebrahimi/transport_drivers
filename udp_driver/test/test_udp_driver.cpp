@@ -21,7 +21,7 @@
 #include <string>
 #include <vector>
 
-#include "udp_driver.hpp"
+#include "udp_driver/udp_driver.hpp"
 
 using std::chrono_literals;
 using autoware::drivers::UdpDriver;
@@ -40,9 +40,10 @@ TEST(UdpDriverTest, NonBlockingSendReceiveTest) {
   int32_t sum = 0;
   driver.receiver()->open();
   driver.receiver()->bind();
-  driver.receiver()->asyncReceive([&](const MutSocketBuffer &buffer) {
-    sum += *reinterpret_cast<int32_t *>(buffer.data());
-  });
+  driver.receiver()->asyncReceive(
+    [&](const MutSocketBuffer & buffer) {
+      sum += *reinterpret_cast<int32_t *>(buffer.data());
+    });
 
   driver.sender()->open();
   EXPECT_EQ(driver.sender()->isOpen(), true);

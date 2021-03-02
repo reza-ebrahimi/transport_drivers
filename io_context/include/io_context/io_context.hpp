@@ -22,15 +22,21 @@
 
 #include <memory>
 
-namespace autoware {
-namespace drivers {
+namespace autoware
+{
 
-class IoContext : private boost::noncopyable {
+namespace drivers
+{
+
+
+class IoContext
+  : private boost::noncopyable
+{
 public:
   explicit IoContext(int16_t threads_count = -1);
   ~IoContext();
 
-  boost::asio::io_service &ios() const;
+  boost::asio::io_service & ios() const;
 
   bool isServiceStopped();
   uint32_t serviceThreadCount();
@@ -38,7 +44,8 @@ public:
   void waitForExit();
 
   template<class F>
-  void post(F f) {
+  void post(F f)
+  {
     ios().post(f);
   }
 
