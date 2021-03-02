@@ -17,7 +17,7 @@
 #include <string>
 
 #include "gtest/gtest.h"
-#include "udp_socket.hpp"
+#include "udp_driver/udp_socket.hpp"
 
 using autoware::drivers::IoContext;
 using autoware::drivers::udp_driver::UdpSocket;

@@ -44,10 +44,11 @@ include_directories(include)
 
 ament_export_include_directories(include)
 ament_auto_find_build_dependencies()
-ament_auto_add_library(${PROJECT_NAME} SHARED
+add_library(${PROJECT_NAME} SHARED
         src/udp_socket.cpp
         src/udp_driver.cpp
         examples/udp_driver_node.cpp)
+
 ament_target_dependencies(${PROJECT_NAME} "rclcpp" "io_context" "std_msgs")
 
 target_compile_options(${PROJECT_NAME} PUBLIC "-O0" PRIVATE -Wall)

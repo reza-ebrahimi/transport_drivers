@@ -26,7 +26,7 @@ UdpDriverNode::UdpDriverNode(
   const std::string & node_name,
   const rclcpp::NodeOptions & options, IoContext & ctx)
 : Node(node_name, options),
-  m_udp_driver(new UdpDriver(ctx))
+  m_udp_driver(ctx)
 {
 }
 
@@ -37,9 +37,9 @@ UdpDriverNode::~UdpDriverNode()
 
 void UdpDriverNode::init_sender(const std::string & ip, int16_t port)
 {
-  m_udp_driver->init_sender(ip, port);
-  if (!m_udp_driver->sender()->isOpen()) {
-    m_udp_driver->sender()->open();
+  m_udp_driver.initialize_sender(ip, port);
+  if (!m_udp_driver.sender()->isOpen()) {
+    m_udp_driver.sender()->open();
   }
 
   createSubscribers();
@@ -49,10 +49,10 @@ void UdpDriverNode::init_receiver(const std::string & ip, uint16_t port)
 {
   createPublishers();
 
-  m_udp_driver->init_receiver(ip, port);
-  m_udp_driver->receiver()->open();
-  m_udp_driver->receiver()->bind();
-  m_udp_driver->receiver()->asyncReceive(
+  m_udp_driver.initialize_receiver(ip, port);
+  m_udp_driver.receiver()->open();
+  m_udp_driver.receiver()->bind();
+  m_udp_driver.receiver()->asyncReceive(
     boost::bind(&UdpDriverNode::receiver_callback, this, _1));
 }
 
@@ -95,7 +95,7 @@ void UdpDriverNode::subscriber_callback(std_msgs::msg::Int32::SharedPtr msg)
   MutSocketBuffer out;
   autoware::msgs::convertFromRos2Message(msg, out);
 
-  m_udp_driver->sender()->asyncSend(out);
+  m_udp_driver.sender()->asyncSend(out);
 }
 
 }  // namespace drivers

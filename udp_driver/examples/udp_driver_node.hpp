@@ -24,8 +24,10 @@
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/qos.hpp"
 
-#include "converters.hpp"
-#include "udp_driver.hpp"
+#include "io_context/converters.hpp"
+#include "udp_driver/udp_driver.hpp"
+
+using autoware::drivers::UdpSocket;
 
 namespace autoware
 {
@@ -50,7 +52,8 @@ private:
   void receiver_callback(const MutSocketBuffer & buffer);
   void subscriber_callback(std_msgs::msg::Int32::SharedPtr msg);
 
-  std::shared_ptr<UdpDriver> m_udp_driver;
+  UdpDriver m_udp_driver;
+
   std::shared_ptr<typename rclcpp::Publisher<std_msgs::msg::Int32>> m_publisher;
   std::shared_ptr<typename rclcpp::Subscription<std_msgs::msg::Int32>> m_subscriber;
 };  // class UdpDriverNode
